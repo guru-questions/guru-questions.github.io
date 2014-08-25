@@ -1,0 +1,97 @@
+body {
+  font: 125%/16px Helvetica;
+}
+
+#guru {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+#guru h1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+}
+button {
+  background: #00c;
+  border: none;
+  color: #fff;
+}
+#guru #start,
+#guru #restart,
+#guru #next {
+  position: absolute;
+  bottom: 50px;
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+#guru #start {
+  background-color: red;
+}
+#guru #next {
+  background-color: blue;
+}
+#guru #restart {
+  background-color: orange;
+}
+
+#guru #intro,
+#guru #question,
+#guru #results {
+  position: absolute;
+  bottom: 200px;
+  width: 90%;
+  height: 100px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#guru #intro {
+
+}
+#guru #results {
+  bottom: 150px;
+}
+
+#guru #results,
+#guru #intro,
+#guru.inactive #restart,
+#guru.inactive #next,
+#guru.inactive #question,
+#guru.active #start,
+#guru.active #restart,
+#guru.complete #next,
+#guru.complete #start
+{
+  display: none;
+}
+#guru.inactive #intro {
+  display: block;
+}
+#guru.complete #results,
+#guru.complete #restart
+{
+  display: block;
+}
+
+#guru #timer {
+  position: absolute;
+  top: 100px;
+  right: 0px;
+  left: 0;
+  font-size: 40px;
+  width: 100px;
+  margin: 0 auto;
+  text-align: center;
+
+}

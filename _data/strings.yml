@@ -1,0 +1,7 @@
+---
+introduction: "This is XXXXX Guru. Click 'start' and answer the questions"
+all_done: "All done!"
+start: "Start"
+times_up: "Time's up!"
+try_again: "Try again"
+you_answered: "You answered {n} questions"

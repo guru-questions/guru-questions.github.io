@@ -1,0 +1,21 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guru</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div id="guru"></div>
+  <script>
+    window.Data = {};
+    !function(Data){
+    Data.questions = {{ site.data.questions | jsonify }};
+    Data.strings = {{ site.data.strings | jsonify }}
+    }(window.Data);
+  </script>
+  <script src="/js/guru.js"></script>
+</body>
+</html>

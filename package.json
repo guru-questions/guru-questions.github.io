@@ -1,0 +1,24 @@
+{
+  "name": "bafta-guru",
+  "version": "0.1.0",
+  "description": "BAFTA Guru",
+  "main": "js/app.js",
+  "author": "Garry Hill",
+  "dependencies": {
+    "mithril": "~0.1.21"
+  },
+  "devDependencies": {
+    "browserify": "~5.10.1",
+    "statics": "~0.1.0",
+    "uglify-js": "~2.4.15",
+    "watchify": "~0.10.2"
+  },
+  "scripts": {
+    "start": "STATIC_ROOT=./static watchify -o js/guru.js -v -d .",
+    "build": "STATIC_ROOT=./static NODE_ENV=production ./node_modules/.bin/browserify . | ./node_modules/.bin/uglifyjs -cm > js/guru.js"
+  },
+  "browserify": {
+    "transform": [
+    ]
+  }
+}
