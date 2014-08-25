@@ -16,6 +16,8 @@ Once you're happy with your changes fill in the "Commit changes" form at the bot
 
 You can then hit the "Commit changes" button and your changes should appear very soon on the [live site][] at [http://guru-questions.github.io/](http://guru-questions.github.io/).
 
+**Note:** Changes may take 10 or more minutes to appear.
+
 [_data/questions.yml]:https://github.com/guru-questions/guru-questions.github.io/blob/master/_data/questions.yml
 [edit page]: https://github.com/guru-questions/guru-questions.github.io/edit/master/_data/questions.yml
 [live site]: http://guru-questions.github.io/
