@@ -1,7 +1,12 @@
 #!/bin/bash
 
+# compile & compress the js
+# I assume that if this step fails the commit will abort...
 npm run-script build
 
+# js/guru.js is in the ignore list (to prevent it being added manually)
+# so we have to pass the --force flag to add it
 git add --force js/guru.js
 
+# I like to know if it's worked
 git status
