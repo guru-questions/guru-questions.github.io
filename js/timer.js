@@ -21,13 +21,11 @@ timer.controller = function(duration, completeCallback) {
 	}.bind(this);
 
 	this.update = function() {
-		// m.startComputation();
 		var now = new Date(), duration = now - this.startTime, seconds = Math.ceil(this.duration - (duration / 1000));
 		this.seconds(seconds);
 		if (seconds === 0) {
 			this.finished();
 		}
-		// m.endComputation();
 		m.redraw();
 	}.bind(this);
 
