@@ -1,0 +1,7 @@
+#!/bin/bash
+
+npm run-script build
+
+git add --force js/guru.js
+
+git status
