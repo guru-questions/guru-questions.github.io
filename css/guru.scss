@@ -75,6 +75,22 @@ body {
   }
 }
 
-@import "ipad.scss";
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+@import "ipad";
+
+// @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+  // ipad
+// }
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px) {
+  // iPhone 5 in portrait & landscape
+  @import "iphone5"
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+  // iPhone 2G-4S in portrait & landscape
+  @import "iphone4"
 }

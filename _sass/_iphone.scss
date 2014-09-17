@@ -1,0 +1,37 @@
+#guru {
+    .inactive {
+      #logo {
+        img {
+          width: 611px;
+          height: 207px;
+        }
+      }
+      #intro {
+        font-size: 55px;
+        line-height: 125%;
+        width: 90%;
+      }
+    }
+    .active, .complete {
+      #logo img {
+          width: 341px;
+          height: 116px;
+      }
+      #timer {
+        top: 200px;
+      }
+      #question {
+        width: 90%;
+        font-size: 70px;
+        line-height: 125%;
+      }
+    }
+    .inactive, .active, .complete {
+      #start,
+      #next,
+      #restart {
+        top: auto;
+        bottom: 109px;
+      }
+    }
+}
