@@ -1,0 +1,20 @@
+@mixin hidden {
+  visibility: hidden;
+  // display: none;
+}
+
+@mixin transition($props...) {
+  transition: $props;
+  -webkit-transition: $props;
+}
+button {
+  @include transition(visibility 1s);
+}
+
+#logo img {
+  @include transition(width 0.5s, height 0.5s, left 0.5s, top 0.5s);
+}
+
+#intro, #question {
+  @include transition(left 0.5s);
+}

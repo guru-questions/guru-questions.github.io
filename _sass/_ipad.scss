@@ -8,6 +8,21 @@
       height: 199px;
       font-size: 83px;
     }
+    #intro {
+      top: 430px;
+      width: 542px;
+      font-size: 20px;
+      line-height: 30px;
+    }
+    #question {
+      top: 420px;
+      height: 300px;
+      font-size: 60px;
+      line-height: 72px;
+      width: 700px;
+      display: table-cell;
+      vertical-align: middle;
+    }
 
     .inactive {
       #logo {
@@ -17,14 +32,14 @@
         }
         top: 109px;
       }
-      #intro {
-        top: 430px;
-        width: 542px;
-        font-size: 20px;
-        line-height: 30px;
-      }
       #start {
         background-color: $yellow;
+      }
+      #question {
+        @include hidden;
+        left: 1000px;
+        right: auto;
+        width: 0;
       }
     }
 
@@ -43,18 +58,13 @@
         }
         top: 32px;
       }
-      #question {
-        top: 420px;
-        height: 300px;
-        font-size: 60px;
-        line-height: 72px;
-        width: 700px;
-        display: table-cell;
-        vertical-align: middle;
-      }
       #next {
         background-color: $blue;
         font-size: 61px;
+      }
+      #intro {
+        left: -1000px;
+        right: auto;
       }
     }
     .complete {

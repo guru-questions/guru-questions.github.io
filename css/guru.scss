@@ -4,6 +4,7 @@
 @import "fonts";
 @import "colours";
 @import "button";
+@import "transitions";
 
 body {
   font: 125%/16px museo300;
@@ -55,7 +56,7 @@ body {
     #question,
     #results,
     #timer {
-      display: none;
+      @include hidden;
     }
   }
   .active {
@@ -63,14 +64,14 @@ body {
     #intro,
     #results,
     #restart {
-      display: none;
+      @include hidden;
     }
   }
   .complete {
     #next,
     #intro,
     #start {
-      display: none;
+      @include hidden;
     }
   }
 }
