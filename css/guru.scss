@@ -1,0 +1,80 @@
+---
+---
+
+@import "fonts";
+@import "colours";
+@import "button";
+
+body {
+  font: 125%/16px museo300;
+  color: $white;
+  background-color: $black;
+  margin: 0;
+  padding: 0;
+}
+
+#guru {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  #logo {
+    position : absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    margin: 0;
+  }
+
+  #start,
+  #restart,
+  #next,
+  #intro,
+  #question,
+  #results,
+  #timer {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  #start,
+  #restart,
+  #next {
+    @include button;
+  }
+
+  .inactive {
+    #restart,
+    #next,
+    #question,
+    #results,
+    #timer {
+      display: none;
+    }
+  }
+  .active {
+    #start,
+    #intro,
+    #results,
+    #restart {
+      display: none;
+    }
+  }
+  .complete {
+    #next,
+    #intro,
+    #start {
+      display: none;
+    }
+  }
+}
+
+@import "ipad.scss";
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+}

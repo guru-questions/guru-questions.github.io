@@ -1,0 +1,13 @@
+
+@mixin button {
+  @include museo;
+  border-radius: 15px;
+  border: none;
+  color: $white;
+  line-height: 100%;
+  text-align: center;
+  outline: none;
+  &:active {
+    background-color: $dark-blue !important;
+  }
+}

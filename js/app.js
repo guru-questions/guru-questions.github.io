@@ -71,6 +71,12 @@ guru.controller = function() {
   	this.complete(true);
   };
 
+  this.stateClass = function() {
+    if (this.complete()) { return ['complete']; }
+    var active = !!this.question();
+    return active ? ['active'] : ['inactive'];
+  };
+
   this.timer = new timer.controller(60, this.timeUp);
 
   // load questions
@@ -80,12 +86,11 @@ guru.controller = function() {
 };
 
 guru.view = function(ctrl) {
-  var active = !!ctrl.question(), appClass = active ? ["active"] : ["inactive"], answered = Strings.you_answered.split("{n}")
-  if (ctrl.complete()) {
-  	appClass.push('complete');
-  }
+  var appClass = ctrl.stateClass(), answered = Strings.you_answered.split("{n}");
   return m('div#guru', {class: appClass.join(" ")}, [
-  	m('h1', "Guru"),
+  	m('h1#logo', [
+      m('img', {src: '/img/guru-logo-neg.png', alt: 'BAFTA Guru'})
+    ]),
   	m('#timer', new timer.view(ctrl.timer)),
   	m('#intro', Strings.introduction),
   	m('button#start', {onclick: ctrl.start}, Strings.start),
@@ -97,9 +102,7 @@ guru.view = function(ctrl) {
       	answered[1]
     ]),
   	m('button#next', {onclick: ctrl.nextQuestion}, [
-  		"Next question (",
-  			(ctrl.questions().length - ctrl.answers()),
-  			" left)"
+  		"Next question"
     ])
 	]);
 };

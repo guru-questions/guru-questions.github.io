@@ -2,3 +2,4 @@ node_modules
 .ruby-*
 _site
 js/guru.js
+.sass-cache

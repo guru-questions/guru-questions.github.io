@@ -35,6 +35,7 @@ timer.controller = function(duration, completeCallback) {
 	};
 
 	this.stop = function() {
+		this.seconds(0);
 		this.stopped(true);
 		this.clearInterval();
 	};
@@ -50,7 +51,9 @@ timer.controller = function(duration, completeCallback) {
 timer.view = function(ctrl) {
 	var view = [], stopped = ctrl.stopped();
 
-	if (!stopped) { view.push(m('div', ctrl.seconds())); }
+		view.push(m('div', ctrl.seconds()));
+	if (!stopped) {
+	}
 	return view;
 };
 

@@ -1,0 +1,82 @@
+  #guru {
+
+    #start,
+    #next,
+    #restart  {
+      top: 753px;
+      width: 593px;
+      height: 199px;
+      font-size: 83px;
+    }
+
+    .inactive {
+      #logo {
+        img {
+          width: 511px;
+          height: 173px;
+        }
+        top: 109px;
+      }
+      #intro {
+        top: 430px;
+        width: 542px;
+        font-size: 20px;
+        line-height: 30px;
+      }
+      #start {
+        background-color: $yellow;
+      }
+    }
+
+    #timer {
+      top: 159px;
+      font-size: 121px;
+      line-height: 121px;
+    }
+
+    .active,
+    .complete {
+      #logo {
+        img {
+          width: 241px;
+          height: 82px;
+        }
+        top: 32px;
+      }
+      #question {
+        top: 420px;
+        height: 300px;
+        font-size: 60px;
+        line-height: 72px;
+        width: 700px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+      #next {
+        background-color: $blue;
+        font-size: 61px;
+      }
+    }
+    .complete {
+      #restart {
+        background-color: $dark-blue;
+        &:active {
+          background-color: $yellow !important;
+        }
+      }
+      #question {
+        color: $yellow;
+        height: 100px;
+      }
+      #results {
+        top: 520px;
+        font-size: 42px;
+        line-height: 50px;
+        color: $white;
+        width: 667px;
+      }
+      #timer {
+        color: $yellow;
+      }
+    }
+  }
