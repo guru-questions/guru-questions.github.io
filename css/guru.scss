@@ -20,6 +20,7 @@ body {
   right: 0;
   bottom: 0;
   top: 0;
+  overflow: hidden;
 
   #logo {
     position : absolute;
@@ -34,8 +35,9 @@ body {
   #restart,
   #next,
   #intro,
-  #question,
+  .question,
   #results,
+  #finished,
   #timer {
     position: absolute;
     margin: 0 auto;
@@ -53,8 +55,9 @@ body {
   .inactive {
     #restart,
     #next,
-    #question,
+    .question,
     #results,
+    #finished,
     #timer {
       @include hidden;
     }
@@ -63,6 +66,7 @@ body {
     #start,
     #intro,
     #results,
+    #finished,
     #restart {
       @include hidden;
     }
@@ -70,6 +74,7 @@ body {
   .complete {
     #next,
     #intro,
+    .question,
     #start {
       @include hidden;
     }
@@ -86,12 +91,20 @@ body {
 and (min-device-width : 320px)
 and (max-device-width : 568px) {
   // iPhone 5 in portrait & landscape
-  @import "iphone5"
+  @import "iphone5";
 }
 
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
   // iPhone 2G-4S in portrait & landscape
-  @import "iphone4"
+  @import "iphone4";
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : landscape) {
+  // iPhone 5 in landscape
+  @import "iphone5-landscape";
 }

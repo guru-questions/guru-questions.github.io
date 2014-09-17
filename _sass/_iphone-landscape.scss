@@ -1,0 +1,33 @@
+#guru {
+  .active, .complete {
+    #logo {
+      left: 50px;
+      right: auto;
+      width: 200px;
+      top: 10px;
+      img {
+        width: 200px;
+        height: 68px;
+      }
+    }
+    #timer {
+      top: 10px;
+      left: auto;
+      right: 50px;
+      font-size: 68px;
+      line-height: 68px;
+    }
+    #next {
+      bottom: 0px;
+      height: 120px;
+      line-height: 100px;
+      left: 0;
+      right: 0;
+      width: auto;
+      font-size: 50px;
+    }
+    .question {
+      font-size: 50px;
+    }
+  }
+}

@@ -3,7 +3,7 @@
     #start,
     #next,
     #restart  {
-      top: 753px;
+      bottom: 100px;
       width: 593px;
       height: 199px;
       font-size: 83px;
@@ -14,12 +14,20 @@
       font-size: 20px;
       line-height: 30px;
     }
-    #question {
+    .question, #finished {
       top: 420px;
       height: 300px;
       font-size: 60px;
       line-height: 72px;
       width: 700px;
+    }
+    .question {
+      top: 0;
+      bottom: 0;
+      display: table;
+      height: 100%;
+    }
+    .question span {
       display: table-cell;
       vertical-align: middle;
     }
@@ -34,6 +42,9 @@
       }
       #start {
         background-color: $yellow;
+        &:active {
+          background-color: $dark-blue;
+        }
       }
       #question {
         @include hidden;
@@ -47,6 +58,7 @@
       top: 159px;
       font-size: 121px;
       line-height: 121px;
+      color: $yellow;
     }
 
     .active,
@@ -67,6 +79,39 @@
         right: auto;
       }
     }
+    @mixin question-offscreen-right {
+      left: 100%;
+      right: auto;
+    }
+    @mixin question-offscreen-left {
+      left: -100%;
+      right: auto;
+    }
+    .active.clock-0 {
+      #question1 {
+        @include question-offscreen-right;
+      }
+      #question2 {
+        @include question-offscreen-left;
+      }
+    }
+    .active.clock-1 {
+      #question0 {
+        @include question-offscreen-left;
+      }
+      #question2 {
+        @include question-offscreen-right;
+      }
+    }
+    .active.clock-2 {
+      #question0 {
+        @include question-offscreen-right;
+      }
+      #question1 {
+        @include question-offscreen-left;
+      }
+    }
+
     .complete {
       #restart {
         background-color: $dark-blue;
@@ -74,7 +119,7 @@
           background-color: $yellow !important;
         }
       }
-      #question {
+      #finished {
         color: $yellow;
         height: 100px;
       }

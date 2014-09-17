@@ -26,6 +26,7 @@ guru.controller = function() {
 	this.started = false;
 	this.questions = m.prop([]);
 	this.question = m.prop("");
+  this.finishedMessage = m.prop("");
 	this.answers = m.prop(0);
 	this.position = 0;
 	this.complete = m.prop(false);
@@ -36,7 +37,12 @@ guru.controller = function() {
 		}
 	};
 
-	this.start = function() {
+  function stopEvent(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+	this.start = function(event) {
+    stopEvent(event);
   	// randomise questions
   	this.answers(0);
   	this.questions(this.questionData.shuffle());
@@ -52,7 +58,9 @@ guru.controller = function() {
   	this.question(q.q());
   }.bind(this);
 
-  this.nextQuestion = function() {
+  this.nextQuestion = function(event) {
+    stopEvent(event);
+    this.previousQuestion = this.question();
   	this.position += 1;
   	if (this.position === this.questions().length) {
   		this.end(Strings.all_done)
@@ -66,16 +74,39 @@ guru.controller = function() {
   }.bind(this);
 
   this.end = function(msg) {
-  	this.question(msg);
+  	this.finishedMessage(msg);
   	this.timer.stop();
   	this.complete(true);
   };
 
   this.stateClass = function() {
     if (this.complete()) { return ['complete']; }
-    var active = !!this.question();
-    return active ? ['active'] : ['inactive'];
+    var active = !!this.question(), stateClasses = active ? ['active'] : ['inactive'];
+    stateClasses.push('clock-'+this.questionClock());
+    return stateClasses.join(' ')
   };
+
+  this.questionClock = function() {
+    var pos;
+    if (arguments.length == 0) {
+      pos = this.position;
+    } else {
+      pos = arguments[0];
+    }
+    return ((pos % 3));
+  };
+
+  this.questionForSlot = function(slotId) {
+    var clock = this.questionClock(), prev = this.questionClock(this.position - 1)
+    if (slotId === clock) {
+      return this.question();
+    }
+    if (slotId === prev) {
+      return this.previousQuestion;
+    }
+
+    return '';
+  }
 
   this.timer = new timer.controller(60, this.timeUp);
 
@@ -87,21 +118,30 @@ guru.controller = function() {
 
 guru.view = function(ctrl) {
   var appClass = ctrl.stateClass(), answered = Strings.you_answered.split("{n}");
-  return m('div#guru', {class: appClass.join(" ")}, [
+  return m('div', {class: appClass}, [
   	m('h1#logo', [
       m('img', {src: '/img/guru-logo-neg.png', alt: 'BAFTA Guru'})
     ]),
   	m('#timer', new timer.view(ctrl.timer)),
   	m('#intro', Strings.introduction),
-  	m('button#start', {onclick: ctrl.start}, Strings.start),
-  	m('button#restart', {onclick: ctrl.start}, Strings.try_again),
-  	m('div#question', ctrl.question()),
+  	m('button#start', {ontouchend: ctrl.start, onclick: ctrl.start}, Strings.start),
+  	m('button#restart', {ontouchend: ctrl.start, onclick: ctrl.start}, Strings.try_again),
+  	m('div#question0.question', [
+      m('span', ctrl.questionForSlot(0))
+    ]),
+    m('div#question1.question', [
+      m('span', ctrl.questionForSlot(1))
+    ]),
+    m('div#question2.question', [
+      m('span', ctrl.questionForSlot(2))
+    ]),
+    m('div#finished', ctrl.finishedMessage()),
   	m('div#results', [
       	answered[0],
       	m('span', ctrl.answers()),
       	answered[1]
     ]),
-  	m('button#next', {onclick: ctrl.nextQuestion}, [
+  	m('button#next', {onclick: ctrl.nextQuestion, ontouchstart: ctrl.nextQuestion}, [
   		"Next question"
     ])
 	]);
