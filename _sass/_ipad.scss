@@ -2,6 +2,7 @@
 
     #start,
     #next,
+    #update,
     #restart  {
       bottom: 100px;
       width: 593px;
@@ -13,6 +14,16 @@
       width: 542px;
       font-size: 20px;
       line-height: 30px;
+    }
+    #update {
+      top: 10px;
+      bottom: auto;
+      background-color: $dark-blue;
+      font-size: 30px;
+      height: 70px;
+      &:active {
+        background-color: $yellow;
+      }
     }
     .question, #finished {
       top: 420px;

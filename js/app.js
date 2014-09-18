@@ -1,7 +1,9 @@
 var m = require('mithril');
 var timer = require('./timer');
-var Strings = window.Data.strings;
+var Data = window.Data;
+var Strings = Data.strings;
 var guru = {};
+var Cache = window.applicationCache;
 
 guru.Question = function(q) {
 	this.q = m.prop(q);
@@ -22,18 +24,20 @@ guru.Questions.prototype.shuffle = function() {
 };
 
 guru.controller = function() {
-	this.questionData = new guru.Questions();
-	this.started = false;
-	this.questions = m.prop([]);
-	this.question = m.prop("");
-  this.finishedMessage = m.prop("");
-	this.answers = m.prop(0);
-	this.position = 0;
-	this.complete = m.prop(false);
+  var ctrl = this;
+	ctrl.questionData = new guru.Questions();
+	ctrl.started = false;
+	ctrl.questions = m.prop([]);
+	ctrl.question = m.prop("");
+  ctrl.finishedMessage = m.prop("");
+	ctrl.answers = m.prop(0);
+	ctrl.position = 0;
+	ctrl.complete = m.prop(false);
+  ctrl.updateAvailable = m.prop(false);
 
-	this.add = function(question) {
+	ctrl.add = function(question) {
 		if (question) {
-			this.questionData.push(new guru.Question(question));
+			ctrl.questionData.push(new guru.Question(question));
 		}
 	};
 
@@ -41,7 +45,7 @@ guru.controller = function() {
     event.stopPropagation();
     event.preventDefault();
   }
-	this.start = function(event) {
+	ctrl.start = function(event) {
     stopEvent(event);
   	// randomise questions
   	this.answers(0);
@@ -50,15 +54,15 @@ guru.controller = function() {
   	this.complete(false);
   	this.timer.start();
   	this.showQuestion();
-  }.bind(this);
+  }.bind(ctrl);
 
-  this.showQuestion = function() {
+  ctrl.showQuestion = function() {
     this.answers(this.answers() + 1);
   	var q = this.questions()[this.position];
   	this.question(q.q());
-  }.bind(this);
+  }.bind(ctrl);
 
-  this.nextQuestion = function(event) {
+  ctrl.nextQuestion = function(event) {
     stopEvent(event);
     this.previousQuestion = this.question();
   	this.position += 1;
@@ -67,54 +71,73 @@ guru.controller = function() {
   	} else {
   		this.showQuestion();
   	}
-  }.bind(this);
+  }.bind(ctrl);
 
-  this.timeUp = function() {
+  ctrl.timeUp = function() {
   	this.end(Strings.times_up);
-  }.bind(this);
+  }.bind(ctrl);
 
-  this.end = function(msg) {
-  	this.finishedMessage(msg);
-  	this.timer.stop();
-  	this.complete(true);
+  ctrl.end = function(msg) {
+  	ctrl.finishedMessage(msg);
+  	ctrl.timer.stop();
+  	ctrl.complete(true);
   };
 
-  this.stateClass = function() {
-    if (this.complete()) { return ['complete']; }
-    var active = !!this.question(), stateClasses = active ? ['active'] : ['inactive'];
-    stateClasses.push('clock-'+this.questionClock());
+  ctrl.stateClass = function() {
+    if (ctrl.complete()) { return ['complete']; }
+    var active = !!ctrl.question(), stateClasses = active ? ['active'] : ['inactive'];
+    stateClasses.push('clock-'+ctrl.questionClock());
     return stateClasses.join(' ')
   };
 
-  this.questionClock = function() {
+  ctrl.questionClock = function() {
     var pos;
     if (arguments.length == 0) {
-      pos = this.position;
+      pos = ctrl.position;
     } else {
       pos = arguments[0];
     }
     return ((pos % 3));
   };
 
-  this.questionForSlot = function(slotId) {
-    var clock = this.questionClock(), prev = this.questionClock(this.position - 1)
+  ctrl.questionForSlot = function(slotId) {
+    var clock = ctrl.questionClock(), prev = ctrl.questionClock(ctrl.position - 1)
     if (slotId === clock) {
-      return this.question();
+      return ctrl.question();
     }
     if (slotId === prev) {
-      return this.previousQuestion;
+      return ctrl.previousQuestion;
     }
 
     return '';
   }
 
-  this.timer = new timer.controller(60, this.timeUp);
+  ctrl.timer = new timer.controller(60, ctrl.timeUp);
+
+  ctrl.reload = function(event) {
+    stopEvent(event);
+    window.location.reload();
+  };
+
+  // register to recieve notifications when the app cache is ready for an update
+
+  function onUpdateReady() {
+    ctrl.updateAvailable(true);
+    m.redraw();
+  }
+
+  Cache.addEventListener('updateready', onUpdateReady);
+
+  if(Cache.status === Cache.UPDATEREADY) {
+    onUpdateReady();
+  }
 
   // load questions
-  for (var i = 0, qq = window.Data.questions, ii = qq.length; i < ii; i++) {
-  	this.add(qq[i]);
+  for (var i = 0, qq = Data.questions, ii = qq.length; i < ii; i++) {
+  	ctrl.add(qq[i]);
   }
 };
+
 
 guru.view = function(ctrl) {
   var appClass = ctrl.stateClass(), answered = Strings.you_answered.split("{n}");
@@ -143,8 +166,11 @@ guru.view = function(ctrl) {
     ]),
   	m('button#next', {onclick: ctrl.nextQuestion, ontouchstart: ctrl.nextQuestion}, [
   		"Next question"
-    ])
-	]);
+    ]),
+    m('button#update', {onclick: ctrl.reload, ontouchstart: ctrl.reload, style: {display: (ctrl.updateAvailable() ? '' : 'none')}}, "Update available")
+  ]);
 };
 
 m.module(document.getElementById('guru'), guru);
+
+window.guru = guru;

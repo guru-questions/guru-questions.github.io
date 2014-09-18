@@ -1,7 +1,7 @@
 ---
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="guru.appcache">
 <head>
   <meta charset="UTF-8">
   <title>Guru</title>
@@ -16,7 +16,6 @@
       Data.questions = {{ site.data.questions | jsonify }};
       Data.strings = {{ site.data.strings | jsonify }};
     }(window.Data));
-
   </script>
   <script src="/js/guru.js"></script>
 </body>

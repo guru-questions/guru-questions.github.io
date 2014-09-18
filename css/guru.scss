@@ -38,6 +38,7 @@ body {
   .question,
   #results,
   #finished,
+  #update,
   #timer {
     position: absolute;
     margin: 0 auto;
@@ -48,6 +49,7 @@ body {
 
   #start,
   #restart,
+  #update,
   #next {
     @include button;
   }
