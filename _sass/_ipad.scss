@@ -123,6 +123,12 @@
       }
     }
 
+    .active {
+      #abort {
+        right: 50px;
+        top: 73px;
+      }
+    }
     .complete {
       #restart {
         background-color: $dark-blue;

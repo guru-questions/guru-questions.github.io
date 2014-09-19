@@ -1,13 +1,15 @@
 ---
 ---
 CACHE MANIFEST
-# version 008 {{ site.time }}
+# version 010 {{ site.time }}
 
 CACHE:
+/
 /index.html
 /css/guru.css
 /js/guru.js
 /img/guru-logo-neg.png
+/img/restart.png
 /fonts/Museo300-Regular-webfont.eot
 /fonts/Museo300-Regular-webfont.svg
 /fonts/Museo300-Regular-webfont.ttf

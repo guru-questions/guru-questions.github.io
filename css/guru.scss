@@ -31,6 +31,14 @@ body {
     margin: 0;
   }
 
+  #abort {
+    position: absolute;
+    width: 80px;
+    height: 79px;
+    background: url(/img/restart.png) no-repeat;
+    background-size: cover;
+  }
+
   #start,
   #restart,
   #next,
@@ -60,6 +68,7 @@ body {
     .question,
     #results,
     #finished,
+    #abort,
     #timer {
       @include hidden;
     }
@@ -77,6 +86,7 @@ body {
     #next,
     #intro,
     .question,
+    #abort,
     #start {
       @include hidden;
     }

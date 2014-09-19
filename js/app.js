@@ -45,6 +45,14 @@ guru.controller = function() {
     event.stopPropagation();
     event.preventDefault();
   }
+  ctrl.restart = function(event) {
+    stopEvent(event);
+    this.complete(false);
+    this.question('');
+    this.position = 0;
+    m.redraw();
+  }.bind(ctrl);
+
 	ctrl.start = function(event) {
     stopEvent(event);
   	// randomise questions
@@ -148,7 +156,7 @@ guru.view = function(ctrl) {
   	m('#timer', new timer.view(ctrl.timer)),
   	m('#intro', Strings.introduction),
   	m('button#start', {ontouchend: ctrl.start, onclick: ctrl.start}, Strings.start),
-  	m('button#restart', {ontouchend: ctrl.start, onclick: ctrl.start}, Strings.try_again),
+  	m('button#restart', {ontouchend: ctrl.restart, onclick: ctrl.restart}, Strings.try_again),
   	m('div#question0.question', [
       m('span', ctrl.questionForSlot(0))
     ]),
@@ -167,6 +175,7 @@ guru.view = function(ctrl) {
   	m('button#next', {onclick: ctrl.nextQuestion, ontouchstart: ctrl.nextQuestion}, [
   		"Next question"
     ]),
+    m('div#abort', {ontouchstart: ctrl.restart, onclick: ctrl.restart}),
     m('button#update', {onclick: ctrl.reload, ontouchstart: ctrl.reload, style: {display: (ctrl.updateAvailable() ? '' : 'none')}}, "Update available")
   ]);
 };
