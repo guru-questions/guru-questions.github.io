@@ -13,7 +13,7 @@
 // }
 
 #logo img {
-  @include transition(width 0.2s, height 0.2s, left 0.2s, top 0.2s);
+  @include transition(width 150ms, height 150ms, left 150ms, top 150ms);
 }
 
 #intro, .question {

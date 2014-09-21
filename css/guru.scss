@@ -33,10 +33,17 @@ body {
 
   #abort {
     position: absolute;
-    width: 80px;
-    height: 79px;
-    background: url(/img/restart.png) no-repeat;
-    background-size: cover;
+    width: 150px;
+    height: 100px;
+    img {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+    }
   }
 
   #start,
@@ -99,6 +106,23 @@ body {
   // ipad
 // }
 
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 1)  {
+  // iPad mini portrait & landscape
+  @import "ipad-mini";
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 1)  {
+  @import "ipad-mini-landscape";
+}
+
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 568px) {
@@ -120,3 +144,4 @@ and (orientation : landscape) {
   // iPhone 5 in landscape
   @import "iphone5-landscape";
 }
+
