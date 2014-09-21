@@ -1,37 +1,71 @@
 #guru {
-    .inactive {
-      #logo {
-        img {
-          width: 611px;
-          height: 207px;
-        }
-      }
-      #intro {
-        font-size: 55px;
-        line-height: 125%;
+  #start,
+  #next,
+  #update,
+  #restart  {
+    bottom: 20px;
+    width: 90%;
+    height: 70px;
+    font-size: 43px;
+  }
+  .inactive {
+    #logo {
+      top: 20px;
+      img {
         width: 90%;
+        height: auto;
+        bottom: auto;
       }
     }
-    .active, .complete {
-      #logo img {
-          width: 341px;
-          height: 116px;
-      }
-      #timer {
-        top: 250px;
-      }
-      .question {
-        width: 90%;
-        font-size: 70px;
-        line-height: 125%;
+    #intro {
+      font-size: 25px;
+      line-height: 125%;
+      width: 90%;
+    }
+  }
+  .active, .complete {
+    #logo {
+      top: 15px;
+      img {
+        width: 50%;
+        height: auto;
       }
     }
-    .inactive, .active, .complete {
-      #start,
-      #next,
-      #restart {
-        top: auto;
-        bottom: 109px;
+    #timer {
+      top: 80px;
+      font-size: 60px;
+      line-height: 60px;
+    }
+    #restart,
+    #next {
+      font-size: 33px;
+    }
+    .question {
+      width: 90%;
+      font-size: 30px;
+      line-height: 125%;
+    }
+    #abort {
+      top: 20px;
+      height: 70px;
+      img {
+        width: 30px;
+        left: auto;
+        right: 10px;
       }
     }
+  }
+  .complete {
+    #finished,
+    #results {
+      width: 90%;
+      font-size: 40px;
+      line-height: 125%;
+      top: 200px;
+    }
+    #results {
+      font-size: 24px;
+      top: 280px;
+    }
+  }
 }
